@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>任务栏</title>
+    <script>
+        window.onload = function () {
+            var imgs = document.getElementsByTagName('img');
+            var menu = document.getElementsByClassName('main'); //集合
+            var imgWidth = imgs[0].width;
+            var imgHeight = imgs[0].height;
+            //alert(menu[0].offsetTop);
+            //alert(imgs[1].offsetLeft - imgs[0].offsetLeft);
+
+            window.onmousemove = function (ev) {
+
+                for(var i=0;i<imgs.length;i++){
+                    var oX = parseInt(imgs[i].offsetLeft) + parseInt(imgs[i].offsetWidth/2);
+                    var oY = parseInt(menu[0].offsetTop) + parseInt(imgs[i].offsetHeight/2);
+                    var a = ev.clientX>oX?ev.clientX-oX:oX-ev.clientX;
+                    var b = ev.clientY>oY?ev.clientY-oY:oY-ev.clientY;
+
+                    var distance = Math.sqrt(a*a + b*b);
+                    imgs[i].width = distance>imgWidth?imgWidth:(2*imgWidth - distance);
+                    imgs[i].height = distance>imgHeight?imgHeight:(2*imgHeight - distance);
+                }
+            }
+        }
+    </script>
+
+    <style>
+
+        .main{
+            width: 100%;
+            position: fixed;
+            bottom: 20px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <img src="images/icon1.png" alt="">
+        <img src="images/icon2.png" alt="">
+        <img src="images/icon3.png" alt="">
+        <img src="images/icon4.png" alt="">
+        <img src="images/icon5.png" alt="">
+        <img src="images/icon6.png" alt="">
+        <img src="images/icon7.png" alt="">
+        <img src="images/icon8.png" alt="">
+    </div>
+</body>
+</html>

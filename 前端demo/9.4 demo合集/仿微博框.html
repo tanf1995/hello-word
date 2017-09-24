@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微博</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            var $btn = $('.btn'),
+                $name = $('.name input'),
+                $content = $('.content'),
+                $messages = $('.messages'),
+                $message = $('.messages .message'),
+                message_format = $message.eq(0).html(),
+                $photos = $('.name ul li')
+                img_link = null;
+
+            for(var i=0;i<$photos.length;i++){
+                $photos.eq(i).click(function () {
+                    $(this).addClass('active').siblings().removeClass('active');
+                    img_link = $(this).children().attr('src');
+                })
+            }
+
+            $btn.click(function () {
+                var name = $name.val(),
+                    content = $content.val(),
+                    now = new Date(),
+                    months = now.getMonth()+1,
+                    day = now.getDate(),
+                    hours = now.getHours(),
+                    minute = now.getMinutes(),
+                    date = null;
+
+                if(name=='' || content=='' || img_link==null){
+                    alert('内容不完全！');
+                    return;
+                }
+
+                if(months<10){
+                    months = '0' + months;
+                }
+
+                if(day<10){
+                    day = '0' + day;
+                }
+
+                if(hours<10){
+                    hours = '0' + hours;
+                }
+
+                if(minute<10){
+                    minute = '0' + minute;
+                }
+                date =months + '月' + day + '日 ' + hours + ':' + minute;
+
+                $messages.append('<div class="message"></div>');
+                $message = $('.messages .message');
+                $message.last().html(message_format);
+                $('.messages .message:last p span:eq(0)').text(name);
+                $('.messages .message:last p span:eq(1)').text(content);
+                $('.messages .message:last img').attr('src', img_link);
+                $('.messages .message:last p:eq(1) ').text(date);
+            });
+
+        });
+    </script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        h2{
+            font-size: 20px;
+            line-height: 40px;
+        }
+        body{
+            background-color: grey;
+        }
+
+        .main{
+            width: 600px;
+            height: 1000px;
+            margin: 10px auto 0;
+            background-color: #fff;
+            border-radius: 1%;
+        }
+
+        .head{
+            padding: 20px 5% 0;
+        }
+
+        .name{
+            margin: 20px 0;
+        }
+
+        .name ul, .name input{
+            display: inline-block;
+        }
+
+        .name ul{
+            list-style: none;
+        }
+
+        .name ul li{
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .name ul li img{
+            width: 40px;
+            height: 40px;
+        }
+
+        .active{
+            border: 2px solid red;
+        }
+
+        .name input{
+            border-radius: 5px;
+        }
+
+        .content{
+            width: 100%;
+            height: 100px;
+            border-radius: 2%;
+        }
+
+        .post p, .post button{
+            display: inline-block;
+        }
+
+        .post button{
+            width: 100px;
+            margin-left: 50px;
+        }
+
+        .post{
+            margin-top: 20px;
+            float: right;
+        }
+
+        .body{
+            clear: both;
+        }
+
+        .body .interval{
+            background-color: grey;
+        }
+
+        .body .interval span{
+            background-color: white;
+            margin-left: 50px;
+            font-size: 20px;
+        }
+
+        .messages{
+            margin: 10px 5% 0;
+        }
+
+        .message{
+            padding-bottom: 5px;
+            border-bottom: 1px dashed aqua;
+        }
+
+        .messages .message img{
+            width: 60px;
+            height: 60px;
+        }
+
+        .messages .message img, .messages .message .cha{
+            display: inline-block;
+        }
+
+        .cha{
+            margin-left: 50px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="head form">
+            <h2>发表你的说说</h2>
+            <div class="name">
+                <input type="text" name="name">
+                <ul>
+                    <li><img src="images/cat.jpg"></li>
+                    <li><img src="images/dog.jpg"></li>
+                    <li><img src="images/wolf.jpg"></li>
+                </ul>
+            </div>
+            <textarea  class="content"></textarea>
+
+            <div class="post">
+                <p>还能输入<span>140</span>个字</p>
+                <button type="button" class="btn btn-primary">发表</button>
+            </div>
+
+        </div>
+
+        <div class="body">
+            <div class="interval"><span>大家在说</span></div>
+
+            <div class="messages">
+                <div class="message">
+                    <img src="images/dog.jpg">
+                    <div class="cha">
+                        <p><span>疾风剑豪</span>: <span>是</span></p>
+                        <p>09月04日 10:20</p>
+                    </div>
+                </div>
+
+                <div class="message">
+                    <img src="images/dog.jpg">
+                    <div class="cha">
+                        <p><span>疾风剑豪</span>: <span>是</span></p>
+                        <p>09月04日 10:20</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标移动图片</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function () {
+            var $photo = $('.photo');
+            var $intro = $('.intro');
+            var status = 0;
+            var status2 = 0;
+
+            $('.btn1').click(function () {
+                var posX, posY;
+
+                $intro.text('点击屏幕位置，yasuo将移动过去');
+                $('.btn1').text('根据鼠标点击位置移动(已激活)');
+                $('.btn2').text('根据鼠标移动轨迹移动');
+                document.onmousedown = null;
+                document.onmousemove = null;
+                document.onmouseup = null;
+
+                $(window).click(function (event) {
+                    posX = event.pageX;
+                    posY = event.pageY;
+
+                    $photo.stop().children().attr('src', 'images/yasuo1.png').parent().animate({
+                        top: posY,
+                        left: posX
+                    }, 3000, function () {
+                        $(this).children().attr('src', 'images/yasuo2.png');
+                    });
+                    return false;
+                });
+
+                return false;
+            });
+
+            $('.btn2').click(function () {
+                var posList = [];
+
+                $intro.text('鼠标滑动轨迹，yasuo沿轨迹移动');
+                $('.btn1').text('根据鼠标点击位置移动');
+                $('.btn2').text('根据鼠标移动轨迹移动(已激活)');
+
+                document.onmousedown = function (ev) {
+                    posList = [{x:ev.clientX, y:ev.clientY}];
+                    document.onmousemove = function (ev) {
+                        //console.log(ev.pageX);
+                        posList.push({x:ev.clientX, y:ev.clientY});
+                        return false;
+                    };
+                    return false;
+                };
+
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+                    //console.log(posList[0].x);
+
+                    $photo.children().attr('src', 'images/yasuo1.png').css({
+                        top: posList[0].y,
+                        left: posList[0].x
+                    });
+                    for(var i=0;i<posList.length;i++){
+                        if(i==0){
+                            $photo.children().attr('src', 'images/yasuo1.png').css({
+                                top: posList[0].y,
+                                left: posList[0].x
+                            });
+                        }
+
+                        if(i==posList[posList.length-1]){
+                            $photo.animate({
+                                top: posList[i].y,
+                                left: posList[i].x
+                            }, 1, function () {
+                                $photo.children().attr('src', 'images/yasuo2.png');
+                            });
+                            return false;
+                        }
+
+                        $photo.animate({
+                            top: posList[i].y,
+                            left: posList[i].x
+                        }, 30);
+                    }
+                    posList = [];
+                    return false;
+                };
+                return false;
+
+            });
+
+        })
+    </script>
+
+    <style>
+        .photo{
+            position: absolute;
+            top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <button type="button" class="btn1">根据鼠标点击位置移动</button>
+    <button type="button" class="btn2">根据鼠标移动轨迹移动</button>
+    <p class="intro">点击按钮激活功能</p>
+
+    <div class="photo">
+        <img src="images/yasuo2.png" name="yasuo">
+    </div>
+</body>
+</html>

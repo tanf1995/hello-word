@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手机滑动解锁</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script>
+        $(function(){
+            var status = [];
+
+            $('.lockBox').draggable({
+
+                // 约束元素在父级内拖动
+                containment:'parent',
+
+                //限制在x轴向拖动
+                axis:'x',
+
+                //拖动是透明度变为0.6
+                opacity:0.6,
+
+                drag:function(ev,ui){
+                    //console.log(ui.position.left);
+                    status.push(ui.position.left);
+                }
+
+            });
+
+            $('.lockBox').mouseup(function () {
+                console.log(status);
+                if(status[status.length-1]<230){
+                    $('.lockBox').animate({left: 0});
+                }
+                else {
+                    $('.main').fadeOut();
+                }
+            });
+        })
+    </script>
+
+    <style>
+        body{
+            overflow: hidden;
+        }
+
+        .main{
+            width: 350px;
+            height: 600px;
+            background-image: url(images/phone1.jpg);
+            margin: auto;
+            position: relative;
+            top: -600px;
+        }
+        
+        .meau{
+            width: 350px;
+            height: 600px;
+            background-image: url("images/phone2.jpg");
+            position: relative;
+            margin: auto;
+            top: 0px;
+        }
+
+        .lock{
+            height: 50px;
+            width: 310px;
+            background-color: #2e323e;
+            position: relative;
+            top: 527px;
+            left: 21px;
+            border-radius: 10px;
+        }
+
+        .lock .lockBox{
+            height: 50px;
+            width: 80px;
+            border-radius: 10px;
+            background-color: #fff;
+            background-image: url("images/箭头.png");
+        }
+    </style>
+</head>
+<body>
+    <div class="meau">
+
+    </div>
+
+    <div class="main">
+        <div class="lock">
+            <div class="lockBox">
+
+            </div>
+            
+        </div>
+
+    </div>
+
+
+</body>
+</html>

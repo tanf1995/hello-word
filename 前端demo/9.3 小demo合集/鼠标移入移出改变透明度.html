@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>透明度</title>
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+    <style>
+        *{margin: 0;padding: 0;}
+        ul{list-style: none;}
+
+        .main{
+            width: 600px;
+            height: 600px;
+            margin: 20px auto 0;
+        }
+
+        .main ul li{
+            display: inline-block;
+            width: 250px;
+            height: 250px;
+            margin-right: 40px;
+            margin-bottom: 40px;
+            border: 2px solid #000;
+            opacity: 0.4;
+        }
+
+        img{
+            width: 250px;
+            height: 250px;
+        }
+    </style>
+    <script>
+        $(function () {
+            var $images = $('ul li');
+            alert($images.length);
+
+            for(var i=0;i<$images.length;i++){
+                $images.eq(i).mouseover(function () {
+                    $(this).css({opacity: 1});
+                });
+
+                $images.eq(i).mouseout(function () {
+                    $(this).css({opacity: 0.4});
+                });
+            }
+        });
+
+    </script>
+</head>
+<body>
+    <div class="main">
+        <ul>
+            <li><img src="images/玫瑰.jpg"></li>
+            <li><img src="images/茉莉.jpg"></li>
+            <li><img src="images/夜来香.jpg"></li>
+            <li><img src="images/桔梗.jpg"></li>
+        </ul>
+    </div>    
+
+</body>
+</html>

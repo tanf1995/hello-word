@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>键盘控制DIV</title>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function () {
+            var $box = $('.box');
+            var $windowW = $(window).width();
+            var $windowH = $(window).height();
+            var colorNum = 0;
+
+            $(window).keydown(function(event){
+                switch (event.keyCode){
+                    //上
+                    case 38:
+                        //变大
+                        if(event.ctrlKey==true){
+                            var widthValue = parseInt($box.css('width'));
+                            var heightValue = parseInt($box.css('height'));
+                            widthValue += 50;
+                            heightValue += 50;
+                            $box.stop().animate({width: widthValue, height: heightValue});
+                            break;
+                        }
+                        var topValue = parseInt($box.css('top'));
+                        topValue = topValue>50?topValue-50:0;
+                        $box.stop().animate({top: topValue});
+                        break;
+                    //右
+                    case 39:
+                        var leftValue = parseInt($box.css('left'));
+                        if(leftValue<$windowW-parseInt($box.css('width'))-50){
+                            leftValue += 50;
+                        }
+                        else{
+                            leftValue = $windowW-parseInt($box.css('width'));
+                        }
+                        $box.stop().animate({left: leftValue});
+                        break;
+
+                    //下
+                    case 40:
+                        //变小
+                        if(event.ctrlKey==true){
+                            var widthValue = parseInt($box.css('width'));
+                            var heightValue = parseInt($box.css('height'));
+                            widthValue -= 50;
+                            heightValue -= 50;
+                            $box.stop().animate({width: widthValue, height: heightValue});
+                            break;
+                        }
+                        var topValue = parseInt($box.css('top'));
+                        if(topValue<$windowH-parseInt($box.css('height'))-50){
+                            topValue += 50;
+                        }
+                        else{
+                            topValue = $windowH-parseInt($box.css('height'));
+                        }
+                        $box.stop().animate({top: topValue});
+                        break;
+
+                    //左
+                    case 37:
+                        var leftValue = parseInt($box.css('left'));
+                        leftValue = leftValue>50?leftValue-50:0;
+                        $box.stop().animate({left: leftValue});
+                        break;
+                    //c 更换颜色
+                    case 67:
+                        if(event.ctrlKey==true){
+                            if(colorNum==0){
+                                $box.stop().css({backgroundColor: 'aqua'});
+                                colorNum = 1;
+                                break;
+                            }
+                            else if(colorNum==1){
+                                $box.stop().css({backgroundColor: 'orange'});
+                                colorNum = 2;
+                                break;
+                            }
+                            else if(colorNum==2){
+                                $box.stop().css({backgroundColor: 'chocolate'});
+                                colorNum = 3;
+                                break;
+                            }
+                            else{
+                                $box.stop().css({backgroundColor: 'black'});
+                                colorNum = 0;
+                                break;
+                            }
+                        }
+                        break;
+                }
+                return false;
+            });
+
+        });
+    </script>
+    <style>
+        .main{
+            height: 200px;
+            background-color: gray;
+        }
+
+        .box{
+            width: 200px;
+            height: 200px;
+            background-color: #000;
+            position: absolute;
+            top: 200px;
+            left: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h2>控制说明：</h2>
+        <p>↑↓←→键移动</p>
+        <p>ctrl+↑ 放大</p>
+        <p>ctrl+↓ 缩小</p>
+        <p>ctrl+c 更换颜色</p>
+    </div>
+
+    <div class="box">
+
+    </div>
+</body>
+</html>

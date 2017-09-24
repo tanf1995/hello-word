@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动态生成表格</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            font-family: 'Microsoft Yahei';
+        }
+
+        .value p, .value input{
+            display: inline-block;
+        }
+
+        .value{
+            margin-left: 50px;
+        }
+
+        .value #row, .value #col{
+            width: 4em;
+        }
+
+        .value button{
+            margin-left: 30px;
+            width: 80px;
+            background-color: black;
+            color: white;
+        }
+
+        .info p{
+            display: inline-block;
+            margin-right: 30px;
+        }
+
+        .info{
+            margin-left: 50px;
+            margin-top: 30px;
+            opacity: 0;
+        }
+
+        .info p:nth-child(2) span:nth-child(1){
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+        }
+
+        .main{
+            border: 1px solid #000000;
+            list-style: none;
+            margin-left: 50px;
+            display: none;
+        }
+
+        .main .grid{
+            display: inline-block;
+        }
+
+        .grid{
+            width: 48px;
+            height: 48px;
+            background-color: antiquewhite;
+            border: 1px solid #000000;
+            margin: 2px 0 0 2px;
+            text-align: center;
+            line-height: 48px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var btn = document.getElementsByTagName('button');
+            var row_inp = document.getElementById('row');
+            var col_inp = document.getElementById('col');
+            var mainBox = document.getElementsByClassName('main');
+            var span1 = document.getElementById('span1');
+            var span2 = document.getElementById('span2');
+            var span3 = document.getElementById('span3');
+            var info = document.getElementsByClassName('info');
+            var li = null;
+            var row, col;
+
+            btn[0].onclick = function () {
+                mainBox[0].innerHTML = '';
+
+                row = row_inp.value;
+                col = col_inp.value;
+
+                mainBox[0].style.width = col*52 + 2 + 'px';
+                mainBox[0].style.height = row*52 + 2 + 'px';
+                mainBox[0].style.display = 'block';
+
+                for(var i=0;i<row*col;i++){
+                    var value = Math.floor(Math.random()*21);
+                    var color1 = Math.floor(Math.random()*255 + 1);
+                    var color2 = Math.floor(Math.random()*255 + 1);
+                    var color3 = Math.floor(Math.random()*255 + 1);
+
+                    var li = document.createElement("li");
+                    li.className = 'grid';
+                    li.innerHTML = value;
+                    li.style.backgroundColor = 'rgb(' + color1 + ',' + color2 + ',' + color3 + ')';
+                    mainBox[0].appendChild(li);
+                }
+
+                li = document.getElementsByTagName('li');
+
+                for(var i=0;i<li.length;i++){
+                    (function (i) {
+                        li[i].onclick = function () {
+                            span1.innerHTML = li[i].innerHTML;
+                            span2.style.backgroundColor = li[i].style.backgroundColor;
+                            span3.innerHTML = li[i].style.backgroundColor;
+
+                            info[0].style.opacity = 1;
+                        }
+                    })(i);
+                }
+            };
+
+        }
+    </script>
+</head>
+<body>
+    <div class="value">
+        <p>行数：</p>
+        <input type="text" id="row">
+
+        <p>列数：</p>
+        <input type="text" id="col">
+
+        <button type="button">生成表格</button>
+    </div>
+
+    <div class="info">
+        <p>您选择的区域数字是：<span id="span1"></span></p><p>颜色为：<span id="span2"></span><span id="span3"></span></p>
+    </div>
+
+    <ul class="main">
+    </ul>
+
+</body>
+</html>

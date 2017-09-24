@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>幻灯片lol</title>
+    <style>
+        .main{
+            width: 800px;
+            height: 400px;
+            background-color: lightgray;
+            margin: 50px auto;
+            padding: 50px;
+            border-radius: 20%;
+            position: relative;
+        }
+
+        .pic{
+            width: 800px;
+            height: 400px;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul{
+            list-style: none;
+        }
+
+        .list{
+            position: absolute;
+            top: 150px;
+            right: 80px;
+        }
+
+        .list ul li{
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            border: 1px solid aqua;
+            margin-bottom: 20px;
+        }
+
+        .main .pic img{
+            position: absolute;
+            top: 400px;
+            left: 0;
+        }
+
+        .main .pic img:nth-child(1){
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .active{
+            background-color: antiquewhite;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function () {
+            var $img = $('.pic img');
+            var $pic = $('.pic');
+            var $li = $('li');
+            var now = 0, next = 0;
+            var timer = null;
+            //alert($li.eq(2).index());
+
+            auto_play();
+
+            //点击圆点
+            for(var i=0;i<$li.length;i++){
+                $li.eq(i).click(function () {
+                    //alert($(this).index());
+                    next = $(this).index();
+                    move();
+                    now = next;
+                    $li.eq(now).addClass('active').siblings().removeClass('active');
+                });
+            }
+
+            $pic.mouseover(function () {
+                clearInterval(timer);
+            });
+
+            $pic.mouseout(function () {
+                auto_play();
+            });
+
+            //自动播放
+            function auto_play() {
+                timer = setInterval(function () {
+                    next = now+1;
+                    move();
+                    now = next;
+                    $li.eq(now).addClass('active').siblings().removeClass('active');
+                }, 3000);
+            }
+
+            function move() {
+                if(next==now){
+                    return false;
+                }
+
+                if(next>4){
+                    next = 0;
+                    $img.eq(next).css({top: 400});
+                    $img.eq(now).stop().animate({top: -400});
+                    $img.eq(next).stop().animate({top: 0});
+                    return false;
+                }
+
+                if(next>now){
+                    $img.eq(next).css({top: 400});
+                    $img.eq(now).stop().animate({top: -400});
+                    $img.eq(next).stop().animate({top: 0});
+                }
+
+                if(next<now){
+                    $img.eq(next).css({top: -400});
+                    $img.eq(now).stop().animate({top: 400});
+                    $img.eq(next).stop().animate({top: 0});
+                }
+            }
+        })
+    </script>
+</head>
+<body>
+<div class="main">
+    <div class="pic">
+        <img src="images/hasak.jpg">
+        <img src="images/zed.jpg">
+        <img src="images/huangmao.jpg">
+        <img src="images/kapai.jpg">
+        <img src="images/yiku.jpg">
+    </div>
+
+    <div class="list">
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

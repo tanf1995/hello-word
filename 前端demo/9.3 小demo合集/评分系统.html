@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>评分系统</title>
+    <style>
+        body{
+            font-size: 10px;
+            line-height: 15px;
+        }
+
+        .main{
+            width: 600px;
+            height: 200px;
+            margin: 10px auto 0;
+            position: relative;
+        }
+
+        .main div{
+            display: inline-block;
+        }
+
+        ul{
+            list-style: none;
+            display: inline-block;
+            padding-left: 0;
+            margin-right: 50px;
+        }
+
+        ul li{
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border: 1px #000000 solid;
+            cursor: pointer;
+        }
+
+        .active{
+            background-color: orange;
+        }
+
+        .main .intro{
+            width: 100px;
+            border: 1px gray solid;
+            text-align: justify;
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function () {
+            var $star = $('.star li');
+            var $ending = $('.ending');
+            var $intro = $('.intro');
+            var value = -1;
+
+            for(var i=0;i<$star.length;i++){
+                $star.eq(i).mouseover(function () {
+                    $star.removeClass('active');
+
+                    if($(this).index()==0){
+                        $intro.html('<p>1 分</p> 差得太离谱，与卖家描述的严重不符，非常不满').css({left: 50}).show();
+
+                    }
+                    else if($(this).index()==1){
+                        $intro.html('<p>2 分</p> 部分有破损，与卖家描述的不符，不满意').css({left: 65}).show();
+                    }
+                    else if($(this).index()==2){
+                        $intro.html('<p>3 分</p> 质量一般，没有卖家描述的那么好').css({left: 80}).show();
+                    }
+                    else if($(this).index()==3){
+                        $intro.html('<p>4 分</p> 质量不错，与卖家描述的基本一致，还是挺满意的').css({left: 95}).show();
+                    }
+                    else{
+                        $intro.html('<p>5 分</p> 质量非常好，与卖家描述的完全一致，非常满意').css({left: 110}).show();
+                    }
+
+                    for(j=0;j<$(this).index()+1;j++){
+                        $star.eq(j).addClass('active');
+                    }
+                });
+            }
+
+            $star.mouseout(function () {
+                $star.removeClass('active');
+                $intro.css({display: 'none'});
+
+                for(var j=0;j<value+1;j++){
+                    $star.eq(j).addClass('active');
+                }
+            });
+
+            $star.click(function () {
+                value = $(this).index();
+
+                if($(this).index()==0){
+                    $ending.html('1 分 (差得太离谱，与卖家描述的严重不符，非常不满)');
+                }
+                else if($(this).index()==1){
+                    $ending.html('2 分 (部分有破损，与卖家描述的不符，不满意)');
+                }
+                else if($(this).index()==2){
+                    $ending.html('3 分 (质量一般，没有卖家描述的那么好)');
+                }
+                else if($(this).index()==3){
+                    $ending.html('4 分 (质量不错，与卖家描述的基本一致，还是挺满意的)');
+                }
+                else{
+                    $ending.html('5 分 (质量非常好，与卖家描述的完全一致，非常满意)');
+                }
+            });
+        })
+    </script>
+
+
+</head>
+<body>
+    <div class="main">
+        <div class="select">
+            <span>点击星星评分:</span>
+            <ul class="star">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <div class="ending">
+
+        </div>
+
+        <div class="intro">
+        </div>
+    </div>
+</body>
+</html>
