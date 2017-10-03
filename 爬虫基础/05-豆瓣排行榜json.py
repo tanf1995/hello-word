@@ -10,6 +10,7 @@ ua_header = {
 
 }
 
+# start代表页数，limit代表每页多少部
 formdata = {
     "start" : "0",
     "limit" : "40"

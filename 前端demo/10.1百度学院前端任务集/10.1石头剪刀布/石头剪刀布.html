@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>石头剪刀布</title>
+</head>
+<script>
+    window.onload = function () {
+        var menu = document.getElementsByClassName('choice')[0];
+        var choices = menu.getElementsByTagName('div');
+        var ending_box = document.getElementsByClassName('ending')[0];
+        var ending = ending_box.getElementsByTagName('span')[0];
+        var count = document.getElementsByClassName('title')[0].getElementsByTagName('h2')[1].getElementsByTagName('span')[0];
+        var mychoice = null;
+        var comchoice = null;
+
+        for(var i=0;i<choices.length;i++){
+            (function(i){
+                choices[i].onclick = function(){
+                    mychoice = i;
+                    comchoice = Math.floor(Math.random()*3);
+                    differ = mychoice - comchoice;
+                    alert(differ);
+                    if(mychoice!=comchoice){
+                        choices[mychoice].classList.add('active_people');
+                        choices[comchoice].classList.add('active_computer');
+                        if(differ==-1 || differ==2){
+                            ending.innerHTML = '你赢了！';
+                            count.innerHTML = parseInt(count.innerHTML)+parseInt(1);
+                        }
+                        else {
+                            ending.innerHTML = '你输了！';
+                        }
+                    }
+                    else{
+                        choices[mychoice].className = 'active_all';
+                        ending.innerHTML = '平手';
+                    }
+                    ending_box.style.display = 'block';
+                }
+            })(i);
+        }
+
+        ending_box.onclick = function () {
+            ending_box.style.display = 'none';
+            choices[0].classList.remove('active_people');
+            choices[0].classList.remove('active_computer');
+            choices[0].classList.remove('active_all');
+            choices[1].classList.remove('active_people');
+            choices[1].classList.remove('active_computer');
+            choices[1].classList.remove('active_all');
+            choices[2].classList.remove('active_people');
+            choices[2].classList.remove('active_computer');
+            choices[2].classList.remove('active_all');
+        }
+    }
+</script>
+<style>
+    .main{
+        background-color: #0e90d2;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .title h2{
+        display: inline-block;
+        position: absolute;
+    }
+
+    .title h2:nth-child(1){
+        left: 10%;
+    }
+
+    .title h2:nth-child(2){
+        right: 10%;
+    }
+
+    .choice{
+        width: 910px;
+        height: 294px;
+        margin: 200px auto 0;
+        background-image: url("images/img1.png");
+    }
+
+    .choice div{
+        float: left;
+        width: 298px;
+        height: 294px;
+    }
+
+    .active_people{
+        border: 2px solid red;
+    }
+
+    .active_computer{
+        border: 2px solid blue;
+    }
+
+    .active_all{
+        border-top: 2px solid red;
+        border-left: 2px solid red;
+        border-right: 2px solid blue;
+        border-bottom: 2px solid blue;
+    }
+
+    .ending{
+        width: 910px;
+        height: 100px;
+        margin: 0 auto 0;
+        text-align: center;
+        display: none;
+    }
+</style>
+<body>
+    <div class="main">
+        <div class="title">
+            <h2>出拳吧少年！</h2>
+            <h2>你已经赢了<span>0</span>次了</h2>
+        </div>
+
+        <div class="choice">
+            <div class="rock"></div>
+            <div class="scissors"></div>
+            <div class="paper"></div>
+        </div>
+
+        <div class="ending">
+            <h2> <span></span> 点击继续下一轮</h2>
+        </div>
+
+    </div>
+</body>
+</html>
