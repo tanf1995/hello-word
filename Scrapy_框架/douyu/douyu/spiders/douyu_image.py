@@ -5,7 +5,7 @@ from douyu.items import DouyuItem
 
 class DouyuImageSpider(scrapy.Spider):
     name = 'douyu_image'
-    allowed_domains = ['http://capi.douyucdn.cn']
+    allowed_domains = ['capi.douyucdn.cn']
     offset = 0
     url = "http://capi.douyucdn.cn/api/v1/getVerticalRoom?limit=100&offset="
     start_urls = [url + str(offset)]
