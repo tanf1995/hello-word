@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+ul{
+    list-style: none;
+}
+
+/*全屏显示*/
+.full_show{
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+/*左浮动*/
+.float{
+    float: left;
+}
+
+/*清除浮动*/
+.clearfix{
+    clear: both;
+}
+
+.screen{
+    background-color: #7ab5d3;
+}
+
+.game{
+    width: 800px;
+    height: 500px;
+    margin: 50px auto 0;
+}
+
+.game_window{
+    width: 600px;
+    height: 500px;
+    border-radius: 20px 0 0 20px;
+    background-image: url(../images/back1.jpg);
+}
+
+.game_window .game_content{
+    width: 400px;
+    height: 400px;
+    margin: 10px auto 0;
+    position: relative;
+    background-color: #fff;
+}
+
+.game_window .title{
+    width: 100%;
+    height: 80px;
+    position: relative;
+}
+
+.title div{
+    position: absolute;
+    width: 300px;
+    height: 80px;
+    top: 10px;
+    line-height: 80px;
+}
+
+.title .name{
+    left: 10px;
+    font-size: 60px;
+    text-align: center;
+}
+
+.title .score{
+    right: 10px;
+    font-size: 40px;
+}
+
+.control_window{
+    width: 200px;
+    height: 500px;
+}
+
+.control_window .restart{
+    width: 100%;
+    height: 100px;
+    background-color: pink;
+    border-radius: 0 20px 0 0;
+    overflow: hidden;
+}
+
+.restart .newgame{
+    width: 160px;
+    height: 80px;
+    margin: 10px 20px;
+    font-size: 40px;
+    line-height: 80px;
+    cursor: pointer;
+    overflow: visible;
+}
+
+.control_window ul{
+    height: 400px;
+    width: 100%;
+    background-color: pink;
+    border-radius: 0 0 20px 0;
+}
+
+.control_window ul li{
+    height: 100px;
+}
+
+.block{
+    width: 100px;
+    height: 100px;
+    font-size: 25px;
+    line-height: 100px;
+    text-align: center;
+    margin-right: -6px;
+    position: absolute;
+    border-radius: 10px;
+    background-color: chocolate;
+}

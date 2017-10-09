@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test</title>
+    <script>
+        window.onload = function () {
+            li = [[1, 2, 2, 4, 4]];
+            for(var i=0;i<li[0].length-1;i++){
+                if(li[0][i]==li[0][i+1]){
+                    li[0][i] = li[0][i]*2;
+                    li[0].splice(i+1, 1);
+                }
+            }
+            console.log(li[0]);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -6,7 +6,7 @@ ua_header = {
     "User-Agent" : "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36"
 }
 
-request = urllib.request.Request(url = url, headers=ua_header)
+request = urllib.request.Request(url=url, headers=ua_header)
 
 response = urllib.request.urlopen(request)
 
