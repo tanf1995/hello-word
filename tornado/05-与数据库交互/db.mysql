@@ -1,0 +1,16 @@
+create database tornado2 charset=utf8;
+
+use tornado2;
+
+create table user_info(
+    ui_id bigint auto_increment comment "用户ID",
+    ui_name varchar(64) not null comment "用户名",
+    ui_passwd varchar(128) not null comment "密码",
+    ui_age int null comment "年龄",
+    ui_mobile int(11) not null comment "手机号",
+    ui_avatar varchar(128) null comment "头像",
+    ui_ctime datetime default current_timestamp comment "用户创建时间",
+    ui_utime datetime default current_timestamp on update current_timestamp comment "更新信息时间",
+    primary key (ui_id),
+    unique (ui_mobile)
+)engine=InnoDB default charset=utf8 comment "用户表";

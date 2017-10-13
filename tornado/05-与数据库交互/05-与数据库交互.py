@@ -55,7 +55,7 @@ class Gethandler(RequestHandler):
         except Exception as e:
             self.write('error: %s'%e)
         else:
-            self.write('index.html', hourse=[ret])
+            self.render('index.html', hourse=[ret])
 
 
 # 继承的app类
