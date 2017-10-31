@@ -14,7 +14,7 @@ BOT_NAME = 'sina2'
 SPIDER_MODULES = ['sina2.spiders']
 NEWSPIDER_MODULE = 'sina2.spiders'
 
-USER_AGENT = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;"
+USER_AGENT = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)"
 
 USER_AGENTS = [
     'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.0)',
